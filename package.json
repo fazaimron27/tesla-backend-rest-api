@@ -1,0 +1,25 @@
+{
+  "name": "tesla-backend-rest-server",
+  "version": "1.0.0",
+  "description": "Tesla Backend Rest Server",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fazaimron27/tesla-backend-rest-server.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fazaimron27/tesla-backend-rest-server/issues"
+  },
+  "homepage": "https://github.com/fazaimron27/tesla-backend-rest-server#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mysql2": "^2.0.2",
+    "sequelize": "^6.21.0"
+  }
+}
