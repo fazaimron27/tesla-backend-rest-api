@@ -17,22 +17,24 @@ app.use(express.urlencoded({ extended: true }));
 
 const db = require("./app/models");
 
-// db.sequelize
-//   .sync()
-//   .then(() => console.log("Synced db."))
-//   .catch((err) => console.log(`Failed to sync db: ${err.message}`));
-
-// drop table if it already exists
 db.sequelize
-  .sync({ force: true })
-  .then(() => console.log("Drop and re-sync db."));
+  .sync()
+  .then(() => console.log("Synced db."))
+  .catch((err) => console.log(`Failed to sync db: ${err.message}`));
+
+// // drop table if it already exists
+// db.sequelize
+//   .sync({ force: true })
+//   .then(() => console.log("Drop and re-sync db."));
 
 // simple route
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to tesla rest server application." });
 });
 
-// require("./app/routes/{name}.routes")(app);
+// routes
+// api routes
+require("./app/routes/api/team.routes.js")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

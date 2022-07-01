@@ -1,24 +1,21 @@
 module.exports = (sequelize, Sequelize) => {
-  const Blog = sequelize.define("blogs", {
-    title: {
+  const Blog = sequelize.define("reviews", {
+    name: {
       type: Sequelize.STRING,
     },
-    slug: {
+    email: {
       type: Sequelize.STRING,
     },
-    description: {
-      type: Sequelize.STRING,
+    stars: {
+      type: Sequelize.INTEGER,
     },
-    content: {
+    comment: {
       type: Sequelize.TEXT,
     },
-    status: {
-      type: Sequelize.BOOLEAN,
-    },
-    user_id: {
+    product_id: {
       type: Sequelize.INTEGER,
       references: {
-        model: "users",
+        model: "products",
         key: "id",
         onDelete: "CASCADE",
         onUpdate: "CASCADE",

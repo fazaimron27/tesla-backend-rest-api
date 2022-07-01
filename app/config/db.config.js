@@ -1,8 +1,10 @@
+const dotenv = require("dotenv").config();
+
 module.exports = {
-  HOST: "128.199.95.116",
-  USER: "admin",
-  PASSWORD: "admin",
-  DB: "tesla_db",
+  HOST: dotenv.parsed.DB_HOST,
+  USER: dotenv.parsed.DB_USER,
+  PASSWORD: dotenv.parsed.DB_PASSWORD,
+  DB: dotenv.parsed.DB_NAME,
   dialect: "mysql",
   pool: {
     max: 5,

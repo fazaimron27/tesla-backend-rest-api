@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-  const Metadata = sequelize.define("metadata", {
+  const Metadata = sequelize.define("metadatas", {
     key: {
       type: Sequelize.STRING,
     },
