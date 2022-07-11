@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <%- include('partials/header') %>
+</head>
+
+<body class="vertical  light  ">
+    <div class="wrapper">
+        <%- include('partials/navbar') %>
+        <%- include('partials/sidebar') %>
+        <main role="main" class="main-content">
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <h2 class="h3 mb-4 page-title">Profile</h2>
+                        <div class="row mt-5 align-items-center">
+                            <div class="col-md-3 text-center mb-5">
+                                <div class="avatar avatar-xl">
+                                    <img src="static/assets/avatars/face-1.jpg" alt="..."
+                                        class="avatar-img rounded-circle">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="row align-items-center">
+                                    <div class="col-md-9">
+                                        <form class="needs-validation" novalidate>
+                                            <div class="form-row">
+                                                <div class="col-md-12 mb-3">
+                                                    <label for="name">Name</label>
+                                                    <input type="text" id="name" class="form-control border-0"
+                                                        value="Mujiyanto" placeholder="Name" required>
+                                                    <div class="invalid-feedback"> Please use a valid
+                                                        name</div>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col-md-12 mb-3">
+                                                    <label for="email">Email</label>
+                                                    <input type="email" id="email" class="form-control border-0"
+                                                        value="mujiyanto@gmail.com" placeholder="Email" required>
+                                                    <div class="invalid-feedback"> Please use a valid
+                                                        email</div>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col-md-12 mb-3">
+                                                    <label for="gender">Gender</label>
+                                                    <select class="custom-select" id="gender" required>
+                                                        <option value="L">Man</option>
+                                                        <option value="P">Woman</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col-md-12 mb-3">
+                                                    <label for="address">Address</label>
+                                                    <textarea class="form-control" id="address" required=""
+                                                        rows="3">Yogyakarta</textarea>
+                                                </div>
+                                            </div>
+                                            <button type="submit" class="btn my-2 btn-success text-white">Save
+                                                changes</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- /.col-12 -->
+                </div> <!-- .row -->
+            </div> <!-- .container-fluid -->
+        </main> <!-- main -->
+    </div> <!-- .wrapper -->
+    <%- include('partials/footer') %>
+    <script>
+        // Form validation
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+
+    </script>
+    <!-- App JS -->
+    <script src="static/js/apps.js"></script>
+</body>
+
+</html>

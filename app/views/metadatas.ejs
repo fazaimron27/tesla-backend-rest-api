@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <%- include('partials/header') %>
+</head>
+
+<body class="vertical  light  ">
+    <div class="wrapper">
+        <%- include('partials/navbar') %>
+        <%- include('partials/sidebar') %>
+        <main role="main" class="main-content">
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <h2 class="mb-2 page-title">Metadatas</h2>
+                        <div class="row my-4">
+                            <!-- Small table -->
+                            <div class="col-md-12">
+                                <div class="card shadow">
+                                    <div class="card-header">
+                                        <button type="button" class="btn mb-2 btn-primary" data-toggle="modal"
+                                            data-target="#metadataModal" data-backdrop="static"
+                                            data-keyboard="false"><span class="fe fe-plus fe-16 mr-2"></span>Add
+                                            New Metadata</button>
+                                    </div>
+                                    <div class="card-body">
+                                        <!-- table -->
+                                        <table class="table datatables" id="metadatasDataTable">
+                                            <thead>
+                                                <tr>
+                                                    <th>No.</th>
+                                                    <th>Key</th>
+                                                    <th>Value</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>company_name</td>
+                                                    <td>Tesla</td>
+                                                    <td>
+                                                        <a href="#"> <i
+                                                                class="fe fe-eye text-primary fe-16 mx-1"></i></a>
+                                                        <a href="#"> <i
+                                                                class="fe fe-edit text-warning fe-16 mx-1"></i></a>
+                                                        <a href="#"> <i
+                                                                class="fe fe-trash-2 text-danger fe-16 mx-1"></i></a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div> <!-- simple table -->
+                        </div> <!-- end section -->
+                    </div> <!-- .col-12 -->
+                </div> <!-- .row -->
+            </div> <!-- .container-fluid -->
+            <div class="modal fade" id="metadataModal" tabindex="-1" role="dialog" aria-labelledby="metadataModalTitle"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="metadataModalTitle">Add New Metadata
+                            </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form class="needs-validation" novalidate>
+                                <div class="form-row">
+                                    <div class="col-md-12 mb-3">
+                                        <label for="key">Key</label>
+                                        <input type="text" class="form-control" id="key" placeholder="Key" required>
+                                        <div class="invalid-feedback"> Please use a valid
+                                            key</div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-12 mb-3">
+                                        <label for="value">Value</label>
+                                        <input type="text" class="form-control" id="value" placeholder="Value" required>
+                                        <div class="invalid-feedback"> Please use a valid
+                                            value</div>
+                                    </div>
+                                </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn mb-2 btn-primary">Save
+                                changes</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main> <!-- main -->
+    </div> <!-- .wrapper -->
+    <%- include('partials/footer') %>
+    <script>
+        // DataTables
+        $('#metadatasDataTable').DataTable({
+            autoWidth: true,
+        });
+
+        // Form validation
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+
+    </script>
+    <!-- App JS -->
+    <script src="static/js/apps.js"></script>
+</body>
+
+</html>
