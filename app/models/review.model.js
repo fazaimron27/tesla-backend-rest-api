@@ -3,7 +3,10 @@ module.exports = (sequelize, Sequelize) => {
     name: {
       type: Sequelize.STRING,
     },
-    email: {
+    position: {
+      type: Sequelize.STRING,
+    },
+    avatar: {
       type: Sequelize.STRING,
     },
     stars: {
@@ -14,15 +17,6 @@ module.exports = (sequelize, Sequelize) => {
     },
     thumbnail: {
       type: Sequelize.STRING,
-    },
-    product_id: {
-      type: Sequelize.INTEGER,
-      references: {
-        model: "products",
-        key: "id",
-        onDelete: "CASCADE",
-        onUpdate: "CASCADE",
-      },
     },
   });
 
