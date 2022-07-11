@@ -5,8 +5,8 @@ module.exports = (app) => {
   router.get("/", function (req, res) {
     res.render("index", {
       title: "Dashboard",
-      styles: ["dataTables.bootstrap4.css"],
-      scripts: ["jquery.dataTables.min.js", "dataTables.bootstrap4.min.js"],
+      styles: ["dataTables.bootstrap4.css", "style.css"],
+      scripts: ["jquery.dataTables.min.js", "dataTables.bootstrap4.min.js", "custom.js"],
     });
   });
 
@@ -22,6 +22,7 @@ module.exports = (app) => {
             "dataTables.bootstrap4.min.js",
             "jquery.validate.min.js",
             "select2.min.js",
+            "custom.js"
           ],
           teams: response.data,
         });
@@ -39,6 +40,7 @@ module.exports = (app) => {
         "jquery.dataTables.min.js",
         "dataTables.bootstrap4.min.js",
         "jquery.validate.min.js",
+        "custom.js"
       ],
     });
   });
@@ -46,11 +48,12 @@ module.exports = (app) => {
   router.get("/metadatas", function (req, res) {
     res.render("metadatas", {
       title: "Metadatas",
-      styles: ["dataTables.bootstrap4.css"],
+      styles: ["dataTables.bootstrap4.css", "style.css"],
       scripts: [
         "jquery.dataTables.min.js",
         "dataTables.bootstrap4.min.js",
         "jquery.validate.min.js",
+        "custom.js"
       ],
     });
   });
@@ -58,16 +61,16 @@ module.exports = (app) => {
   router.get("/profile", function (req, res) {
     res.render("profile", {
       title: "Profile",
-      styles: null,
-      scripts: ["jquery.validate.min.js"],
+      styles: ["style.css"],
+      scripts: ["jquery.validate.min.js", "custom.js"],
     });
   });
 
   router.get("/settings", function (req, res) {
     res.render("settings", {
       title: "Settings",
-      styles: null,
-      scripts: ["jquery.validate.min.js", "bootstrap-show-password.js"],
+      styles: ["style.css"],
+      scripts: ["jquery.validate.min.js", "bootstrap-show-password.js", "custom.js"],
     });
   });
 
