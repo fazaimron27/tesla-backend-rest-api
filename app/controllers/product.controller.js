@@ -1,35 +1,39 @@
 const db = require("../models");
-const Team = db.teams;
+const Product = db.products;
+var slugify = require("slugify");
 
 exports.index = (req, res) => {
-  Team.findAll()
+  Product.findAll()
     .then((data) => {
       res.send(data);
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while retrieving teams.",
+        message:
+          err.message || "Some error occurred while retrieving products.",
       });
     });
 };
 
 exports.store = (req, res) => {
-  const team = {
+  const product = {
     name: req.body.name,
-    id_card: req.body.id_card,
-    email: req.body.email,
-    avatar_url: req.body.avatar_url,
-    gender: req.body.gender,
-    address: req.body.address,
+    slug: slugify(req.body.name, {
+      replacement: "-",
+      lower: true,
+    }),
+    thumbnail: req.body.thumbnail,
+    description: req.body.description,
+    details: req.body.details,
   };
 
-  Team.create(team)
+  Product.create(product)
     .then((data) => {
       res.send(data);
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while adding the Team.",
+        message: err.message || "Some error occurred while adding the Product.",
       });
     });
 };
@@ -37,19 +41,19 @@ exports.store = (req, res) => {
 exports.show = (req, res) => {
   const id = req.params.id;
 
-  Team.findByPk(id)
+  Product.findByPk(id)
     .then((data) => {
       if (data) {
         res.send(data);
       } else {
         res.status(404).send({
-          message: `Cannot find Team with id = ${id}.`,
+          message: `Cannot find Product with id = ${id}.`,
         });
       }
     })
     .catch((err) => {
       res.status(500).send({
-        message: "Error retrieving Team with id = " + id,
+        message: "Error retrieving Product with id = " + id,
       });
     });
 };
@@ -57,23 +61,23 @@ exports.show = (req, res) => {
 exports.update = (req, res) => {
   const id = req.params.id;
 
-  Team.update(req.body, {
+  Product.update(req.body, {
     where: { id: id },
   })
     .then((num) => {
       if (num == 1) {
         res.send({
-          message: "Team was updated successfully.",
+          message: "Product was updated successfully.",
         });
       } else {
         res.send({
-          message: `Cannot update Team with id = ${id}. Maybe Team was not found or req.body is empty!`,
+          message: `Cannot update Product with id = ${id}. Maybe Product was not found or req.body is empty!`,
         });
       }
     })
     .catch((err) => {
       res.status(500).send({
-        message: "Error updating Team with id = " + id,
+        message: "Error updating Product with id = " + id,
       });
     });
 };
@@ -81,23 +85,23 @@ exports.update = (req, res) => {
 exports.destroy = (req, res) => {
   const id = req.params.id;
 
-  Team.destroy({
+  Product.destroy({
     where: { id: id },
   })
     .then((num) => {
       if (num == 1) {
         res.send({
-          message: "Team was deleted successfully!",
+          message: "Product was deleted successfully!",
         });
       } else {
         res.send({
-          message: `Cannot delete Team with id = ${id}. Maybe Team was not found!`,
+          message: `Cannot delete Product with id = ${id}. Maybe Product was not found!`,
         });
       }
     })
     .catch((err) => {
       res.status(500).send({
-        message: "Could not delete Team with id = " + id,
+        message: "Could not delete Product with id = " + id,
       });
     });
 };

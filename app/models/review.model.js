@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-  const Blog = sequelize.define("reviews", {
+  const Review = sequelize.define("reviews", {
     name: {
       type: Sequelize.STRING,
     },
@@ -12,6 +12,9 @@ module.exports = (sequelize, Sequelize) => {
     comment: {
       type: Sequelize.TEXT,
     },
+    thumbnail: {
+      type: Sequelize.STRING,
+    },
     product_id: {
       type: Sequelize.INTEGER,
       references: {
@@ -23,5 +26,5 @@ module.exports = (sequelize, Sequelize) => {
     },
   });
 
-  return Blog;
+  return Review;
 };

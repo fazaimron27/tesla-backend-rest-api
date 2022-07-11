@@ -2,9 +2,10 @@ const express = require("express");
 const cors = require("cors");
 
 const app = express();
+app.set("view engine", "ejs");
 
 var corsOptions = {
-  origin: "http://localhost:8081",
+  origin: "http://127.0.0.1:4000",
 };
 
 app.use(cors(corsOptions));
@@ -27,14 +28,17 @@ db.sequelize
 //   .sync({ force: true })
 //   .then(() => console.log("Drop and re-sync db."));
 
-// simple route
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to tesla rest server application." });
-});
+// // simple route
+// app.get("/", (req, res) => {
+//   res.json({ message: "Welcome to tesla rest server application." });
+// });
 
 // routes
 // api routes
 require("./app/routes/api/team.routes.js")(app);
+require("./app/routes/api/product.routes.js")(app);
+
+// web routes
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

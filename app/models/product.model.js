@@ -7,16 +7,10 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING,
     },
     thumbnail: {
-      type: Sequelize.BOOLEAN,
-    },
-    price: {
-      type: Sequelize.BIGINT,
+      type: Sequelize.STRING,
     },
     description: {
       type: Sequelize.STRING,
-    },
-    details: {
-      type: Sequelize.TEXT,
     },
   });
 
