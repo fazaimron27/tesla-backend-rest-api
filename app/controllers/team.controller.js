@@ -19,6 +19,7 @@ exports.store = (req, res) => {
     id_card: req.body.id_card,
     email: req.body.email,
     avatar: req.body.avatar,
+    role: req.body.role,
     gender: req.body.gender,
     address: req.body.address,
   };
