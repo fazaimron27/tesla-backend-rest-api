@@ -2,6 +2,7 @@ const dotenv = require("dotenv").config();
 
 module.exports = {
   HOST: dotenv.parsed.DB_HOST,
+  PORT: dotenv.parsed.DB_PORT,
   USER: dotenv.parsed.DB_USER,
   PASSWORD: dotenv.parsed.DB_PASSWORD,
   DB: dotenv.parsed.DB_NAME,
