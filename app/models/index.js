@@ -24,5 +24,6 @@ db.teams = require("./team.model.js")(sequelize, Sequelize);
 db.products = require("./product.model.js")(sequelize, Sequelize);
 db.reviews = require("./review.model.js")(sequelize, Sequelize);
 db.metadatas = require("./metadata.model.js")(sequelize, Sequelize);
+db.messages = require("./message.model.js")(sequelize, Sequelize);
 
 module.exports = db;

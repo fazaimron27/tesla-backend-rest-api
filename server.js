@@ -42,6 +42,7 @@ require("./app/routes/api/team.routes.js")(app);
 require("./app/routes/api/product.routes.js")(app);
 require("./app/routes/api/metadata.routes.js")(app);
 require("./app/routes/api/review.routes.js")(app);
+require("./app/routes/api/message.routes.js")(app);
 
 // web routes
 require("./app/routes/web/routes.js")(app);
