@@ -3,9 +3,19 @@ module.exports = (app) => {
   const axios = require("axios").default;
 
   router.get("/", function (req, res) {
-    axios
-      .get("http://localhost:8080/api/reviews")
-      .then(function (response) {
+    function getReviews() {
+      return axios.get("http://127.0.0.1:8080/api/reviews");
+    }
+
+    function getMessages() {
+      return axios.get("http://127.0.0.1:8080/api/messages");
+    }
+
+    Promise.all([getReviews(), getMessages()])
+      .then(function (results) {
+        const reviews = results[0];
+        const messages = results[1];
+
         res.render("index", {
           title: "Dashboard",
           styles: ["dataTables.bootstrap4.css", "style.css"],
@@ -15,18 +25,19 @@ module.exports = (app) => {
             "axios.min.js",
             "custom.js",
           ],
-          reviews: response.data,
+          reviews: reviews.data,
+          messages: messages.data,
         });
       })
-      .catch(function (response) {
-        console.log(response);
+      .catch(function (err) {
+        console.log(err);
       });
   });
 
   // Teams
   router.get("/teams", function (req, res) {
     axios
-      .get("http://localhost:8080/api/teams")
+      .get("http://127.0.0.1:8080/api/teams")
       .then(function (response) {
         res.render("teams", {
           title: "Teams",
@@ -65,7 +76,7 @@ module.exports = (app) => {
   // Products
   router.get("/products", function (req, res) {
     axios
-      .get("http://localhost:8080/api/products")
+      .get("http://127.0.0.1:8080/api/products")
       .then(function (response) {
         res.render("products", {
           title: "Products",
@@ -103,7 +114,7 @@ module.exports = (app) => {
   // Metadata
   router.get("/metadatas", function (req, res) {
     axios
-      .get("http://localhost:8080/api/metadatas")
+      .get("http://127.0.0.1:8080/api/metadatas")
       .then(function (response) {
         res.render("metadatas", {
           title: "Metadatas",

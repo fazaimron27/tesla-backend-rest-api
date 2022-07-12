@@ -54,7 +54,7 @@
                     </div>
                 </div> -->
                 <div class="row justify-content-center">
-                    <div class="col-12">
+                    <div class="col-10">
                         <div class="card shadow">
                             <div class="card-header text-center">
                                 <strong class="card-title">Users Reviews</strong>
@@ -94,6 +94,47 @@
                         </div>
                     </div> <!-- .col-12 -->
                 </div>
+                <div class="row justify-content-center mt-5">
+                    <div class="col-10">
+                        <div class="card shadow">
+                            <div class="card-header text-center">
+                                <strong class="card-title">Users Messages</strong>
+                            </div>
+                            <div class="card-body">
+                                <!-- table -->
+                                <table class="table datatables" id="messagesDataTable">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>message</th>
+                                            <th>Reply</th>
+                                            <!-- <th>Action</th> -->
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% messages.forEach(function(message, index) { %>
+                                        <tr>
+                                            <td><%= index += 1 %></td>
+                                            <td><%= message.name %></td>
+                                            <td><%= message.email %></td>
+                                            <td><%= message.message.substr(0, 80) %></td>
+                                            <td>
+                                                <a href="#"><i class="fe fe-mail fe-16 mx-1"></i></a>
+                                            </td>
+                                            <!-- <td>
+                                                <a href="#"> <i class="fe fe-eye text-primary fe-16 mx-1"></i></a>
+                                                <a href="#"> <i class="fe fe-trash-2 text-danger fe-16 mx-1"></i></a>
+                                            </td> -->
+                                        </tr>
+                                        <% }); %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div> <!-- .col-12 -->
+                </div>
             </div> <!-- .container-fluid -->
         </main> <!-- main -->
     </div> <!-- .wrapper -->
@@ -102,6 +143,10 @@
         $(document).ready(function () {
             // DataTables
             $('#reviewsDataTable').DataTable({
+                autoWidth: true,
+            });
+
+            $('#messagesDataTable').DataTable({
                 autoWidth: true,
             });
         });

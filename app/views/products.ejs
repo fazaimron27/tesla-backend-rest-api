@@ -166,7 +166,7 @@
             $('.edit').click(function () {
                 const id = $(this).data('id');
 
-                axios.get(`http://localhost:8080/api/products/${id}`)
+                axios.get(`http://127.0.0.1:8080/api/products/${id}`)
                     .then(function (response) {
                         // console.log(response);
                         $('#name').val(response.data.name);
@@ -186,7 +186,7 @@
                         thumbnail: '',
                         description: $('#description').val(),
                     }
-                    axios.put(`http://localhost:8080/api/products/${id}`, data)
+                    axios.put(`http://127.0.0.1:8080/api/products/${id}`, data)
                         .then(function (response) {
                             // console.log(response);
                             if (response.status == 200) {
@@ -222,7 +222,7 @@
                     confirmButtonText: 'Yes, delete it!'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        axios.delete(`http://localhost:8080/api/products/${id}`)
+                        axios.delete(`http://127.0.0.1:8080/api/products/${id}`)
                             .then(() => {
                                 Swal.fire(
                                         'Deleted!',
