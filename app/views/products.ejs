@@ -15,14 +15,12 @@
                     <div class="col-12">
                         <h2 class="mb-2 page-title">Products</h2>
                         <div class="row my-4">
-                            <!-- Small table -->
                             <div class="col-md-12">
                                 <div class="card shadow">
                                     <div class="card-header">
-                                        <button type="button" class="btn mb-2 btn-primary" data-toggle="modal"
-                                            data-target="#productModal" data-backdrop="static"
-                                            data-keyboard="false"><span class="fe fe-plus fe-16 mr-2"></span>Add
-                                            New Product</button>
+                                        <a href="/products-create" class="btn mb-2 btn-primary"><span
+                                                class="fe fe-plus fe-16 mr-2"></span>Add
+                                            New Product</a>
                                     </div>
 
                                     <div class="card-body">
@@ -37,27 +35,31 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                <% products.forEach(function(product, index) { %>
                                                 <tr>
-                                                    <td>1</td>
-                                                    <td>Tesla Motors</td>
-                                                    <td>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                        Praesentium accusamus veniam illum voluptate debitis, temporibus
-                                                        placeat porro vero, reiciendis, possimus nulla quam
-                                                        necessitatibus neque fuga odit id atque magnam fugiat.</td>
+                                                    <td><%= index += 1 %></td>
+                                                    <td><%= product.name %></td>
+                                                    <td><%= product.description.substr(0, 100) + '....' %></td>
                                                     <td>
-                                                        <a href="#"> <i
-                                                                class="fe fe-eye text-primary fe-16 mx-1"></i></a>
-                                                        <a href="#"> <i
-                                                                class="fe fe-edit text-warning fe-16 mx-1"></i></a>
-                                                        <a href="#"> <i
-                                                                class="fe fe-trash-2 text-danger fe-16 mx-1"></i></a>
+                                                        <!-- <a style="cursor: pointer;">
+                                                            <i class="fe fe-eye text-primary fe-16 mx-1"></i>
+                                                        </a> -->
+                                                        <a class="edit" data-id="<%= product.id %>"
+                                                            style="cursor: pointer;">
+                                                            <i class="fe fe-edit text-warning fe-16 mx-1"></i>
+                                                        </a>
+                                                        <a class="delete" data-id="<%= product.id %>"
+                                                            style="cursor: pointer;">
+                                                            <i class="fe fe-trash-2 text-danger fe-16 mx-1"></i>
+                                                        </a>
                                                     </td>
                                                 </tr>
+                                                <% }); %>
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
-                            </div> <!-- simple table -->
+                            </div>
                         </div>
                     </div> <!-- .col-12 -->
                 </div> <!-- .row -->
@@ -68,8 +70,7 @@
                 <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="productModalTitle">Add New Product
-                            </h5>
+                            <h5 class="modal-title" id="productModalTitle"></h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -86,12 +87,12 @@
                                 </div>
                                 <div class="form-row">
                                     <div class="col-md-12 mb-3">
-                                        <p>Thumbnail</p>
-                                        <img id="image" class="d-none mb-3" src="" alt="your image"
+                                        <p>Thumbnail (optional)</p>
+                                        <img id="image" class="d-none mb-3" src="" alt="thumbnail"
                                             style="max-width:600px;" />
                                         <div class="custom-file">
                                             <input type="file" class="custom-file-input" id="thumbnail"
-                                                onchange="readURL(this);" required>
+                                                onchange="readURL(this);">
                                             <label class="custom-file-label" for="thumbnail">Choose
                                                 file...</label>
                                             <div class="invalid-feedback">Please choose a valid
@@ -102,16 +103,15 @@
                                 <div class="form-row">
                                     <div class="col-md-12 mb-3">
                                         <label for="description">Description</label>
-                                        <textarea class="form-control" id="description" placeholder="Description" required=""
-                                            rows="3"></textarea>
+                                        <textarea class="form-control" id="description" placeholder="Description"
+                                            required rows="3"></textarea>
                                         <div class="invalid-feedback"> Please enter a
                                             description in the textarea. </div>
                                     </div>
                                 </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn mb-2 btn-primary">Save
-                                changes</button>
+                            <button type="submit" class="btn mb-2 btn-success text-white">Save</button>
                             </form>
                         </div>
 
@@ -122,44 +122,123 @@
     </div> <!-- .wrapper -->
     <%- include('partials/footer') %>
     <script>
-        // DataTables
-        $('#productsDataTable').DataTable({
-            autoWidth: true,
-        });
+        $(document).ready(function () {
+            // DataTables
+            $('#productsDataTable').DataTable({
+                autoWidth: true,
+            });
 
-        // Preview image
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
+            // Preview image
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
 
-                reader.onload = function (e) {
-                    $('#image').removeClass("d-none");
-                    $('#image')
-                        .attr('src', e.target.result);
-                };
+                    reader.onload = function (e) {
+                        $('#image').removeClass("d-none");
+                        $('#image')
+                            .attr('src', e.target.result);
+                    };
 
-                reader.readAsDataURL(input.files[0]);
+                    reader.readAsDataURL(input.files[0]);
+                }
             }
-        }
 
-        // Form validation
-        (function () {
-            'use strict';
-            window.addEventListener('load', function () {
-                // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                var forms = document.getElementsByClassName('needs-validation');
-                // Loop over them and prevent submission
-                var validation = Array.prototype.filter.call(forms, function (form) {
-                    form.addEventListener('submit', function (event) {
-                        if (form.checkValidity() === false) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                        }
-                        form.classList.add('was-validated');
-                    }, false);
+            // Form validation
+            (function () {
+                'use strict';
+                window.addEventListener('load', function () {
+                    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                    var forms = document.getElementsByClassName('needs-validation');
+                    // Loop over them and prevent submission
+                    var validation = Array.prototype.filter.call(forms, function (form) {
+                        form.addEventListener('submit', function (event) {
+                            if (form.checkValidity() === false) {
+                                event.preventDefault();
+                                event.stopPropagation();
+                            }
+                            form.classList.add('was-validated');
+                        }, false);
+                    });
+                }, false);
+            })();
+
+            // Edit Product
+            $('.edit').click(function () {
+                const id = $(this).data('id');
+
+                axios.get(`http://localhost:8080/api/products/${id}`)
+                    .then(function (response) {
+                        // console.log(response);
+                        $('#name').val(response.data.name);
+                        $('#description').val(response.data.description);
+
+                        $('#productModalTitle').html('Edit Product');
+                        $('#productModal').modal('show');
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+
+                $('.needs-validation').on('submit', function (e) {
+                    e.preventDefault();
+                    const data = {
+                        name: $('#name').val(),
+                        thumbnail: '',
+                        description: $('#description').val(),
+                    }
+                    axios.put(`http://localhost:8080/api/products/${id}`, data)
+                        .then(function (response) {
+                            // console.log(response);
+                            if (response.status == 200) {
+                                $('#teamModal').modal('hide');
+                                Swal.fire(
+                                    'Sucessfully!',
+                                    'Product has been updated.',
+                                    'success'
+                                ).then((result) => {
+                                    if (result.isConfirmed) {
+                                        window.location.reload();
+                                    }
+                                })
+                            }
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
                 });
-            }, false);
-        })();
+            });
+
+            // Delete Product
+            $('.delete').click(function () {
+                const id = $(this).data('id');
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        axios.delete(`http://localhost:8080/api/products/${id}`)
+                            .then(() => {
+                                Swal.fire(
+                                        'Deleted!',
+                                        'Product has been deleted.',
+                                        'success'
+                                    )
+                                    .then((result) => {
+                                        if (result.isConfirmed) {
+                                            window.location.reload();
+                                        }
+                                    })
+                            });
+                    }
+                });
+            });
+        });
 
     </script>
     <script src="static/js/apps.js"></script>

@@ -13,12 +13,12 @@
             <div class="container-fluid">
                 <div class="row justify-content-center">
                     <div class="col-12">
-                        <h2 class="mb-2 page-title">Add New Team</h2>
+                        <h2 class="mb-2 page-title">Add New Product</h2>
                         <div class="row my-4">
                             <div class="col-md-12">
                                 <div class="card shadow mb-4">
                                     <div class="card-header">
-                                        <a href="/teams" class="btn btn-sm mb-2 btn-danger"><span
+                                        <a href="/products" class="btn btn-sm mb-2 btn-danger"><span
                                                 class="fe fe-arrow-left fe-16 mr-2"></span>Back</a>
                                     </div>
                                     <div class="card-body">
@@ -26,7 +26,7 @@
                                             <div class="form-row">
                                                 <div class="col-md-12 mb-3">
                                                     <label for="name">Name</label>
-                                                    <input type="text" class="form-control" placeholder="Name" id="name"
+                                                    <input type="text" class="form-control" id="name" placeholder="Name"
                                                         required>
                                                     <div class="invalid-feedback"> Please use a valid
                                                         name</div>
@@ -34,31 +34,13 @@
                                             </div>
                                             <div class="form-row">
                                                 <div class="col-md-12 mb-3">
-                                                    <label for="id_card">ID Card</label>
-                                                    <input type="text" class="form-control" placeholder="ID Card"
-                                                        id="id_card" required>
-                                                    <div class="invalid-feedback"> Please use a valid
-                                                        id card</div>
-                                                </div>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="col-md-12 mb-3">
-                                                    <label for="email">Email</label>
-                                                    <input type="email" class="form-control" placeholder="Email"
-                                                        id="email" required>
-                                                    <div class="invalid-feedback"> Please use a valid
-                                                        email</div>
-                                                </div>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="col-md-12 mb-3">
-                                                    <p>Avatar (optional)</p>
-                                                    <img id="image" class="d-none mb-3" src="" alt="avatar"
+                                                    <p>Thumbnail (optional)</p>
+                                                    <img id="image" class="d-none mb-3" src="" alt="thumbnail"
                                                         style="max-width:600px;" />
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" id="avatar"
+                                                        <input type="file" class="custom-file-input" id="thumbnail"
                                                             onchange="readURL(this);">
-                                                        <label class="custom-file-label" for="avatar">Choose
+                                                        <label class="custom-file-label" for="thumbnail">Choose
                                                             file...</label>
                                                         <div class="invalid-feedback">Please choose a valid
                                                             file</div>
@@ -67,31 +49,11 @@
                                             </div>
                                             <div class="form-row">
                                                 <div class="col-md-12 mb-3">
-                                                    <label for="role">Role</label>
-                                                    <input type="text" class="form-control" placeholder="Role" id="role"
-                                                        required>
-                                                    <div class="invalid-feedback"> Please use a valid
-                                                        role</div>
-                                                </div>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="form-group col-md-12 mb-3">
-                                                    <label for="gender">Gender</label>
-                                                    <select class="form-control select2" id="gender" required>
-                                                        <option value="">Select gender</option>
-                                                        <option value="L">Man</option>
-                                                        <option value="P">Woman</option>
-                                                    </select>
-                                                    <div class="invalid-feedback"> Please select a valid gender.</div>
-                                                </div>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="col-md-12 mb-3">
-                                                    <label for="address">Address</label>
-                                                    <textarea class="form-control" id="address" placeholder="Address"
-                                                        required rows="3"></textarea>
+                                                    <label for="description">Description</label>
+                                                    <textarea class="form-control" id="description"
+                                                        placeholder="Description" required rows="3"></textarea>
                                                     <div class="invalid-feedback"> Please enter a
-                                                        address in the textarea. </div>
+                                                        description in the textarea. </div>
                                                 </div>
                                             </div>
                                             <button type="submit"
@@ -102,8 +64,9 @@
                             </div>
                         </div>
                     </div>
-                </div> <!-- .col-12 -->
-            </div> <!-- .row -->
+                </div>
+            </div> <!-- .col-12 -->
+    </div> <!-- .row -->
     </div> <!-- .container-fluid -->
     </main> <!-- main -->
     </div> <!-- .wrapper -->
@@ -150,29 +113,25 @@
                 }, false);
             })();
 
-            // Add Team
+            // Add Product
             $('.needs-validation').on('submit', function (e) {
                 e.preventDefault();
                 const data = {
                     name: $('#name').val(),
-                    id_card: $('#id_card').val(),
-                    email: $('#email').val(),
-                    avatar: '',
-                    role: $('#role').val(),
-                    gender: $('#gender').val(),
-                    address: $('#address').val(),
+                    thumbnail: '',
+                    description: $('#description').val(),
                 }
-                axios.post('http://localhost:8080/api/teams', data)
+                axios.post('http://localhost:8080/api/products', data)
                     .then(function (response) {
                         // console.log(response);
                         if (response.status == 200) {
                             Swal.fire(
                                 'Sucessfully!',
-                                'Team has been added.',
+                                'Product has been added.',
                                 'success'
                             ).then((result) => {
                                 if (result.isConfirmed) {
-                                    window.location.href = '/teams';
+                                    window.location.href = '/products';
                                 }
                             })
                         }

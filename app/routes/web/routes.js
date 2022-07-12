@@ -41,21 +41,7 @@ module.exports = (app) => {
 
   router.get("/teams-create", function (req, res) {
     res.render("teams-create", {
-      title: "Teams",
-      styles: ["style.css", "select2.css"],
-      scripts: [
-        "jquery.validate.min.js",
-        "select2.min.js",
-        "sweetalert2.all.min.js",
-        "axios.min.js",
-        "custom.js",
-      ],
-    });
-  });
-
-  router.get("/teams-edit", function (req, res) {
-    res.render("teams-edit", {
-      title: "Teams",
+      title: "Add New Team",
       styles: ["style.css", "select2.css"],
       scripts: [
         "jquery.validate.min.js",
@@ -69,13 +55,37 @@ module.exports = (app) => {
 
   // Products
   router.get("/products", function (req, res) {
-    res.render("products", {
-      title: "Products",
-      styles: ["dataTables.bootstrap4.css", "style.css"],
+    axios
+      .get("http://localhost:8080/api/products")
+      .then(function (response) {
+        res.render("products", {
+          title: "Products",
+          styles: ["dataTables.bootstrap4.css", "style.css"],
+          scripts: [
+            "jquery.dataTables.min.js",
+            "dataTables.bootstrap4.min.js",
+            "jquery.validate.min.js",
+            "sweetalert2.all.min.js",
+            "axios.min.js",
+            "custom.js",
+          ],
+          products: response.data,
+        });
+      })
+      .catch(function (response) {
+        console.log(response);
+      });
+  });
+
+  router.get("/products-create", function (req, res) {
+    res.render("products-create", {
+      title: "Add New Product",
+      styles: ["style.css", "select2.css"],
       scripts: [
-        "jquery.dataTables.min.js",
-        "dataTables.bootstrap4.min.js",
         "jquery.validate.min.js",
+        "select2.min.js",
+        "sweetalert2.all.min.js",
+        "axios.min.js",
         "custom.js",
       ],
     });
