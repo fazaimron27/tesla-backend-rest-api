@@ -21,7 +21,7 @@
                         </div>
                     </div> <!-- .col-12 -->
                 </div> <!-- .row -->
-                <div class="row justify-content-center">
+                <!-- <div class="row justify-content-center">
                     <div class="col-md-4 mb-4">
                         <div class="card shadow">
                             <div class="card-body">
@@ -52,11 +52,13 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="row justify-content-center">
-                    <div class="col-8">
-                        <h2 class="mb-4 mt-4 page-title text-center">Users Reviews</h2>
+                    <div class="col-12">
                         <div class="card shadow">
+                            <div class="card-header text-center">
+                                <strong class="card-title">Users Reviews</strong>
+                            </div>
                             <div class="card-body">
                                 <!-- table -->
                                 <table class="table datatables" id="reviewsDataTable">
@@ -64,54 +66,28 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Name</th>
-                                            <th>Email</th>
                                             <th>Stars</th>
                                             <th>Comments</th>
-                                            <th>Date</th>
-                                            <th>Status</th>
-                                            <th>Action</th>
+                                            <!-- <th>Action</th> -->
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <% reviews.forEach(function(review, index) { %>
                                         <tr>
-                                            <td>1</td>
-                                            <td>John Doe</td>
-                                            <td>johndoe@mail.com</td>
+                                            <td><%= index += 1 %></td>
+                                            <td><%= review.name %></td>
                                             <td>
+                                                <% for( let i = 0; i < review.stars; i++ ) { %>
                                                 <i class="fe fe-star text-warning"></i>
-                                                <i class="fe fe-star text-warning"></i>
-                                                <i class="fe fe-star text-warning"></i>
+                                                <% } %>
                                             </td>
-                                            <td>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</td>
-                                            <td>11 July 2022</td>
-                                            <td>
-                                                <button type="button"
-                                                    class="btn btn-sm btn-success text-white">Active</button>
-                                            </td>
-                                            <td>
+                                            <td><%= review.comment.substr(0, 80) + '....' %></td>
+                                            <!-- <td>
                                                 <a href="#"> <i class="fe fe-eye text-primary fe-16 mx-1"></i></a>
                                                 <a href="#"> <i class="fe fe-trash-2 text-danger fe-16 mx-1"></i></a>
-                                            </td>
+                                            </td> -->
                                         </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>John Doe</td>
-                                            <td>johndoe@mail.com</td>
-                                            <td>
-                                                <i class="fe fe-star text-warning"></i>
-                                                <i class="fe fe-star text-warning"></i>
-                                                <i class="fe fe-star text-warning"></i>
-                                            </td>
-                                            <td>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</td>
-                                            <td>11 July 2022</td>
-                                            <td>
-                                                <button type="button" class="btn btn-sm btn-danger">Deactive</button>
-                                            </td>
-                                            <td>
-                                                <a href="#"> <i class="fe fe-eye text-primary fe-16 mx-1"></i></a>
-                                                <a href="#"> <i class="fe fe-trash-2 text-danger fe-16 mx-1"></i></a>
-                                            </td>
-                                        </tr>
+                                        <% }); %>
                                     </tbody>
                                 </table>
                             </div>
@@ -123,10 +99,13 @@
     </div> <!-- .wrapper -->
     <%- include('partials/footer') %>
     <script>
-        // DataTables
-        $('#reviewsDataTable').DataTable({
-            autoWidth: true,
+        $(document).ready(function () {
+            // DataTables
+            $('#reviewsDataTable').DataTable({
+                autoWidth: true,
+            });
         });
+
     </script>
     <!-- App JS -->
     <script src="static/js/apps.js"></script>

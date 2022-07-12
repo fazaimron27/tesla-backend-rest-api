@@ -13,47 +13,32 @@
             <div class="container-fluid">
                 <div class="row justify-content-center">
                     <div class="col-12">
-                        <h2 class="mb-2 page-title">Add New Product</h2>
+                        <h2 class="mb-2 page-title">Add New Metadata</h2>
                         <div class="row my-4">
                             <div class="col-md-12">
                                 <div class="card shadow mb-4">
                                     <div class="card-header">
-                                        <a href="/products" class="btn btn-sm mb-2 btn-danger"><span
+                                        <a href="/metadatas" class="btn btn-sm mb-2 btn-danger"><span
                                                 class="fe fe-arrow-left fe-16 mr-2"></span>Back</a>
                                     </div>
                                     <div class="card-body">
                                         <form class="needs-validation" novalidate>
                                             <div class="form-row">
                                                 <div class="col-md-12 mb-3">
-                                                    <label for="name">Name</label>
-                                                    <input type="text" class="form-control" id="name" placeholder="Name"
+                                                    <label for="key">Key</label>
+                                                    <input type="text" class="form-control" id="key" placeholder="Key"
                                                         autofocus required>
                                                     <div class="invalid-feedback"> Please use a valid
-                                                        name</div>
+                                                        key</div>
                                                 </div>
                                             </div>
                                             <div class="form-row">
                                                 <div class="col-md-12 mb-3">
-                                                    <p>Thumbnail (optional)</p>
-                                                    <img id="image" class="d-none mb-3" src="" alt="thumbnail"
-                                                        style="max-width:600px;" />
-                                                    <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" id="thumbnail"
-                                                            onchange="readURL(this);">
-                                                        <label class="custom-file-label" for="thumbnail">Choose
-                                                            file...</label>
-                                                        <div class="invalid-feedback">Please choose a valid
-                                                            file</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="col-md-12 mb-3">
-                                                    <label for="description">Description</label>
-                                                    <textarea class="form-control" id="description"
-                                                        placeholder="Description" required rows="3"></textarea>
-                                                    <div class="invalid-feedback"> Please enter a
-                                                        description in the textarea. </div>
+                                                    <label for="value">Value</label>
+                                                    <input type="text" class="form-control" id="value"
+                                                        placeholder="Value" required>
+                                                    <div class="invalid-feedback"> Please use a valid
+                                                        value</div>
                                                 </div>
                                             </div>
                                             <button type="submit"
@@ -64,36 +49,14 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div> <!-- .col-12 -->
-    </div> <!-- .row -->
+                </div> <!-- .col-12 -->
+            </div> <!-- .row -->
     </div> <!-- .container-fluid -->
     </main> <!-- main -->
     </div> <!-- .wrapper -->
     <%- include('partials/footer') %>
     <script>
         $(document).ready(function () {
-            // select2
-            $('.select2').select2({
-                theme: 'bootstrap4',
-                width: '100%',
-            });
-
-            // Preview image
-            function readURL(input) {
-                if (input.files && input.files[0]) {
-                    var reader = new FileReader();
-
-                    reader.onload = function (e) {
-                        $('#image').removeClass("d-none");
-                        $('#image')
-                            .attr('src', e.target.result);
-                    };
-
-                    reader.readAsDataURL(input.files[0]);
-                }
-            }
-
             // Form validation
             (function () {
                 'use strict';
@@ -113,25 +76,24 @@
                 }, false);
             })();
 
-            // Add Product
+            // Add Team
             $('.needs-validation').on('submit', function (e) {
                 e.preventDefault();
                 const data = {
-                    name: $('#name').val(),
-                    thumbnail: '',
-                    description: $('#description').val(),
+                    key: $('#key').val(),
+                    value: $('#value').val(),
                 }
-                axios.post('http://localhost:8080/api/products', data)
+                axios.post('http://localhost:8080/api/metadatas', data)
                     .then(function (response) {
                         // console.log(response);
                         if (response.status == 200) {
                             Swal.fire(
                                 'Sucessfully!',
-                                'Product has been added.',
+                                'Metadatas has been added.',
                                 'success'
                             ).then((result) => {
                                 if (result.isConfirmed) {
-                                    window.location.href = '/products';
+                                    window.location.href = '/metadatas';
                                 }
                             })
                         }

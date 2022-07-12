@@ -3,15 +3,24 @@ module.exports = (app) => {
   const axios = require("axios").default;
 
   router.get("/", function (req, res) {
-    res.render("index", {
-      title: "Dashboard",
-      styles: ["dataTables.bootstrap4.css", "style.css"],
-      scripts: [
-        "jquery.dataTables.min.js",
-        "dataTables.bootstrap4.min.js",
-        "custom.js",
-      ],
-    });
+    axios
+      .get("http://localhost:8080/api/reviews")
+      .then(function (response) {
+        res.render("index", {
+          title: "Dashboard",
+          styles: ["dataTables.bootstrap4.css", "style.css"],
+          scripts: [
+            "jquery.dataTables.min.js",
+            "dataTables.bootstrap4.min.js",
+            "axios.min.js",
+            "custom.js",
+          ],
+          reviews: response.data,
+        });
+      })
+      .catch(function (response) {
+        console.log(response);
+      });
   });
 
   // Teams
@@ -93,13 +102,36 @@ module.exports = (app) => {
 
   // Metadata
   router.get("/metadatas", function (req, res) {
-    res.render("metadatas", {
-      title: "Metadatas",
-      styles: ["dataTables.bootstrap4.css", "style.css"],
+    axios
+      .get("http://localhost:8080/api/metadatas")
+      .then(function (response) {
+        res.render("metadatas", {
+          title: "Metadatas",
+          styles: ["dataTables.bootstrap4.css", "style.css"],
+          scripts: [
+            "jquery.dataTables.min.js",
+            "dataTables.bootstrap4.min.js",
+            "jquery.validate.min.js",
+            "sweetalert2.all.min.js",
+            "axios.min.js",
+            "custom.js",
+          ],
+          metadatas: response.data,
+        });
+      })
+      .catch(function (response) {
+        console.log(response);
+      });
+  });
+
+  router.get("/metadatas-create", function (req, res) {
+    res.render("metadatas-create", {
+      title: "Add New Metadata",
+      styles: ["style.css"],
       scripts: [
-        "jquery.dataTables.min.js",
-        "dataTables.bootstrap4.min.js",
         "jquery.validate.min.js",
+        "sweetalert2.all.min.js",
+        "axios.min.js",
         "custom.js",
       ],
     });
