@@ -8,7 +8,7 @@ app.set("view engine", "ejs");
 app.use("/static", express.static(__dirname + "/public"));
 
 var corsOptions = {
-  origin: ["http://127.0.0.1:8080", "http://127.0.0.1:3000"],
+  origin: "https://tesla-backend-rest-server-production.up.railway.app",
 };
 
 app.use(cors(corsOptions));
@@ -48,5 +48,5 @@ require("./app/routes/api/message.routes.js")(app);
 require("./app/routes/web/routes.js")(app);
 
 // set port, listen for requests
-const PORT = 8080;
+const PORT = 80;
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}.`));

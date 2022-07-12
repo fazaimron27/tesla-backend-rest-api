@@ -4,11 +4,15 @@ module.exports = (app) => {
 
   router.get("/", function (req, res) {
     function getReviews() {
-      return axios.get("http://127.0.0.1:8080/api/reviews");
+      return axios.get(
+        "https://tesla-backend-rest-server-production.up.railway.app/api/reviews"
+      );
     }
 
     function getMessages() {
-      return axios.get("http://127.0.0.1:8080/api/messages");
+      return axios.get(
+        "https://tesla-backend-rest-server-production.up.railway.app/api/messages"
+      );
     }
 
     Promise.all([getReviews(), getMessages()])
@@ -37,7 +41,9 @@ module.exports = (app) => {
   // Teams
   router.get("/teams", function (req, res) {
     axios
-      .get("http://127.0.0.1:8080/api/teams")
+      .get(
+        "https://tesla-backend-rest-server-production.up.railway.app/api/teams"
+      )
       .then(function (response) {
         res.render("teams", {
           title: "Teams",
@@ -76,7 +82,9 @@ module.exports = (app) => {
   // Products
   router.get("/products", function (req, res) {
     axios
-      .get("http://127.0.0.1:8080/api/products")
+      .get(
+        "https://tesla-backend-rest-server-production.up.railway.app/api/products"
+      )
       .then(function (response) {
         res.render("products", {
           title: "Products",
@@ -114,7 +122,9 @@ module.exports = (app) => {
   // Metadata
   router.get("/metadatas", function (req, res) {
     axios
-      .get("http://127.0.0.1:8080/api/metadatas")
+      .get(
+        "https://tesla-backend-rest-server-production.up.railway.app/api/metadatas"
+      )
       .then(function (response) {
         res.render("metadatas", {
           title: "Metadatas",

@@ -133,7 +133,9 @@
             $('.edit').click(function () {
                 const id = $(this).data('id');
 
-                axios.get(`http://127.0.0.1:8080/api/metadatas/${id}`)
+                axios.get(
+                        `https://tesla-backend-rest-server-production.up.railway.app/api/metadatas/${id}`
+                        )
                     .then(function (response) {
                         // console.log(response);
                         $('#key').val(response.data.key);
@@ -152,7 +154,9 @@
                         key: $('#key').val(),
                         value: $('#value').val(),
                     }
-                    axios.put(`http://127.0.0.1:8080/api/metadatas/${id}`, data)
+                    axios.put(
+                            `https://tesla-backend-rest-server-production.up.railway.app/api/metadatas/${id}`,
+                            data)
                         .then(function (response) {
                             // console.log(response);
                             if (response.status == 200) {
@@ -188,7 +192,9 @@
                     confirmButtonText: 'Yes, delete it!'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        axios.delete(`http://127.0.0.1:8080/api/metadatas/${id}`)
+                        axios.delete(
+                                `https://tesla-backend-rest-server-production.up.railway.app/api/metadatas/${id}`
+                                )
                             .then(() => {
                                 Swal.fire(
                                         'Deleted!',

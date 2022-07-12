@@ -162,7 +162,8 @@
                     gender: $('#gender').val(),
                     address: $('#address').val(),
                 }
-                axios.post('http://127.0.0.1:8080/api/teams', data)
+                axios.post('https://tesla-backend-rest-server-production.up.railway.app/api/teams',
+                        data)
                     .then(function (response) {
                         // console.log(response);
                         if (response.status == 200) {
