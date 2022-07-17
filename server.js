@@ -8,7 +8,10 @@ app.set("view engine", "ejs");
 app.use("/static", express.static(__dirname + "/public"));
 
 var corsOptions = {
-  origin: "https://tesla-backend-rest-server-production.up.railway.app",
+  origin: [
+    "https://tesla-backend-rest-server-production.up.railway.app",
+    "https://tesla-frontend-rest-client.vercel.app",
+  ],
 };
 
 app.use(cors(corsOptions));
