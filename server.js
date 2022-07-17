@@ -11,6 +11,7 @@ var corsOptions = {
   origin: [
     "https://tesla-backend-rest-server-production.up.railway.app",
     "https://tesla-frontend-rest-client.vercel.app",
+    "https://tesla-frontend-rest-client.netlify.app",
   ],
 };
 
